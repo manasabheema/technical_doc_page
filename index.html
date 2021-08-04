@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Title-->
+    <title>Technical Documentation Page</title>
+    <!--Meta-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav id="navbar">
+        <header>Intermediate Algorithm Scripting (JavaScript)</header>
+        <ul>
+            <li><a href="#Introduction" class="nav-link">Introduction</a></li>
+            <li><a href="#Pig_Latin" class="nav-link">Pig Latin</a></li>
+            <li><a href="#Search_and_Replace" class="nav-link">Search and Replace</a>
+            </li>
+            <li><a href="#Sum_All_Primes" class="nav-link">Sum All Primes</a></li>
+            <li><a href="#Sorted_Union" class="nav-link">Sorted Union</a></li>
+            <li><a href="#Smallest_Common_Multiple" class="nav-link">Smallest Common Multiple</a></li>
+            <li><a href="#Convert_HTML_Entities" class="nav-link">Convert HTML Entities</a></li>
+            <li><a href="#Drop_it" class="nav-link">Drop it</a></li>
+            <li><a href="#Steamroller" class="nav-link">Steamroller</a></li>
+            <li><a href="#Binary_Agents" class="nav-link">Binary Agents</a></li>
+            <li><a href="#Everything_Be_True" class="nav-link">Everything Be True</a></li>
+            <li><a href="#Map_the_Debris" class="nav-link">Map the Debris</a></li>
+
+    </nav>
+
+    <main id="main-doc">
+        <section id="Introduction" class="main-section">
+            <header>Introduction</header>
+            <article>
+                <p>We are going to discuss few important programs that are given in Intermediate Algorithm Scripting by
+                    FreeCodeCamp. Basic data structure concepts are very well covered in this course. JavaScript/Programming beginners may find these questions a bit difficult. In this page 
+                    you find those all main solutions along with a brief description.</p>
+            </article>
+        </section><!-- section 1-->
+
+        <section id="Pig_Latin" class="main-section">
+            <header>Pig Latin</header>
+            <article>
+                <p><span><strong>Problem Description : </strong></span>Pig Latin is a way of altering English Words. The
+                    rules are as follows:
+
+                <ul>
+                    <li>If a word begins with a consonant, take the first consonant or consonant cluster, move it to the
+                        end of the word, and add <span><code class="inside">ay</code></span> to it.
+                    </li>
+                    <li>If a word begins with a vowel, just add <code class="inside">way</code> at the end.</li>
+                </ul>
+                Translate the provided string to Pig Latin. Input strings are guaranteed to be English words in all
+                lowercase.</p>
+                <div><b>Solution :</b></div>
+                <ul>
+                    <li>Using regular expressions can help us in this solution.</li>
+                    <li>Use the regEx to match a particular string in the given string and replace it with required string
+                        as per the query.</li>
+                </ul>
+                <pre>
+                <code class="solution-code">function <method>translatePigLatin</method>(str) {
+                  let regexCon = /<string>^[^aeiou]+</string>/;
+                  let startCon = str.<method>match</method>(regexCon);
+                  return startCon !== null ? str.<method>replace</method>(regexCon,<string>""</string>)+startCon+<string>'ay'</string> : str+<string>'way'</string>;
+                }
+                <comment>//calling the function with a string as it's argument</comment>
+                <method>translatePigLatin</method>(<string>"rhythm"</string>);
+                </code>
+              </pre>
+            </article>
+        </section><!-- section 2-->
+
+        <section id="Search_and_Replace" class="main-section">
+            <header>Search and Replace</header>
+            <article>
+                <p><span><strong>Problem Description : </strong></span>Perform a search and replace on the sentence
+                    using the arguments provided and return the new sentence.
+                <ul>
+                    <li>First argument is the sentence to perform the search and replace on.</li>
+                    <li>Second argument is the word that you will be replacing (before).</li>
+                    <li>Third argument is what you will be replacing the second argument with (after).</li>
+                </ul>
+
+                <strong>Note:</strong> Preserve the case of the first character in the original word when you are
+                replacing it. For example if you mean to replace the word <code class="inside">Book</code> with the
+                word <code class="inside">dog</code>, it should be replaced as <code class="inside">Dog</code>
+                </p>
+                <div><b>Solution :</b></div>
+                <ul>
+                    <li>Usage of regular expressions and toUpperCase and lower case methods will make it possible.</li>
+                </ul>
+                <pre>
+                <code>function <method>myReplace</method>(str, before, after) {
+                  if(/<string>^[A-Z]</string>/.<method>test</method>(before)){
+                   after = after[0].<method>toUpperCase</method>()+after.<method>substr</method>(1);
+                  }else{
+                  after = after[0].<method>toLowerCase</method>()+after.<method>substr</method>(1);
+                  }
+          
+                  return str.<method>replace</method>(before,after);
+                }
+        
+        <method>myReplace</method>(<string>"A quick brown fox jumped over the lazy dog"</string>, <string>"jumped"</string>, <string>"leaped"</string>);
+                </code>
+              </pre>
+            </article>
+        </section><!-- section 3-->
+
+        <section id="Sum_All_Primes" class="main-section">
+            <header>Sum All Primes</header>
+            <article>
+                <p><span><strong>Problem Description : </strong></span>A <i>prime&nbsp;number</i> is a whole number
+                    greater than 1 with exactly two divisors: 1 and itself. For example, 2 is a prime number because it
+                    is only divisible by 1 and 2. In contrast, 4 is not prime since it is divisible by 1, 2 and 4.</p>
+                <p>Rewrite <code class="inside">sumPrimes</code> so it returns the sum of all prime numbers that are
+                    less than or equal to num.</p>
+                <div><b>Solution :</b></div>
+                <ul>
+                    <li>Writing another function to calculate whether a perticular number is prime or not.</li>
+                    <li>Then calling it for every number till given number and adding it to sum total if it's a prime
+                        will give us required answer.</li>
+                </ul>
+                <pre>
+                <code>function <method>isPrime</method>(n){
+                      if(n &lt;= 1){
+                        return false;
+                      }
+                      else if(n == 2 || n == 3){
+                        return true;
+                      }
+                      else{
+                        for(let i = 2; i&lt;=(n/2); i++){
+                          if(n%i == 0){
+                            return false;
+                            break;
+                           }
+                         }
+                       }
+                     return true;
+                   }
+        
+                   function <method>sumPrimes</method>(num) {
+                      var sum = 0;
+                      for(let i = 2; i&lt;=num; i++){
+                        if(<method>isPrime</method>(i)){
+                          sum += i;
+                        }
+                      }
+                      return sum;
+                    }
+        
+        
+                    <method>sumPrimes</method>(10);
+                </code>
+              </pre>
+            </article>
+        </section><!-- section 4-->
+
+        <section id="Sorted_Union" class="main-section">
+            <header>Sorted Union</header>
+            <article>
+                <p><span><strong>Problem Description : </strong></span>Write a function that takes two or more arrays
+                    and returns a new array of unique values in the order of the original provided arrays. In other
+                    words, all values present from all arrays should be included in their original order, but with no
+                    duplicates in the final array.</p>
+                <p>The unique numbers should be sorted by their original order, but the final array should not be sorted
+                    in numerical order.
+                </p>
+                <div><b>Solution :</b></div>
+                <ul>
+                    <li><code class="inside">flat()</code> method of array gives us a flat array from complex form of
+                        array till metioned particular level.</li>
+                    <li>Checking every element if it is already existed or not will make our output flat array has no
+                        duplicate elements.</li>
+                </ul>
+                <pre>
+                <code>function <method>uniteUnique</method>(arr) {
+                    return Object.<method>values</method>(arguments).<method>flat</method>(1).<method>filter</method>((x, i, array) => i==array.<method>indexOf</method>(x));
+                }
+        
+                <method>uniteUnique</method>([1, 3, 2], [5, 2, 1, 4], [2, 1]);
+                </code>
+              </pre>
+            </article>
+        </section><!-- section 5-->
+
+        <section id="Smallest_Common_Multiple" class="main-section">
+            <header>Smallest Common Multiple</header>
+            <article>
+                <p><span><strong>Problem Description : </strong></span>
+                    Find the smallest common multiple of the provided parameters that can be evenly divided by both, as
+                    well as by all sequential numbers in the range between these parameters.</p>
+
+                <p>The range will be an array of two numbers that will not necessarily be in numerical order.</p>
+
+                <p>For example, if given 1 and 3, find the smallest common multiple of both 1 and 3 that is also evenly
+                    divisible by all numbers *between* 1 and 3. The answer here would be 6.</p>
+                <div><b>Solution :</b></div>
+                <pre>
+                <code>function <method>smallestCommons</method>(arr) {
+                  let [min,max] = arr.<method>sort</method>((a,b)=>a-b);
+                  let s_c_m = min;
+                <comment>//smallestCommonMultiple of min and max</comment>
+                  for(let i = 1; i<=min; i++){
+                    for(let j = 1; j<=max; j++){
+                      if(max*i == j*min){
+                        s_c_m = max*i;
+                        break;
+                      }
+                    }
+                  }
+                <comment> //multiplying smallestCommonMultiple of min and max with numbers from 1 to get the scm for all range numbers</comment>
+                  for(let i = min+1; i&lt;max; i++){
+                    let div = 1;
+                    while(div &gt; 0){
+                      if((s_c_m*div)%i==0){
+                        s_c_m = s_c_m*div;
+                        break;
+                      }
+                      div++;
+                    }
+                  }
+                  
+                  return s_c_m;
+                }
+                
+                <method>smallestCommons</method>([1,5]);     
+                </code>
+              </pre>
+            </article>
+        </section><!-- section 6-->
+
+        <section id="Convert_HTML_Entities" class="main-section">
+            <header>Convert HTML Entities</header>
+            <article>
+                <p><span><strong>Problem Description : </strong></span>
+                    Convert the characters &, &lt;, &gt;, " (double quote), and ' (apostrophe), in a string to their
+                    corresponding HTML entities.
+                </p>
+                <div><b>Solution :</b></div>
+                <pre>
+                <code>function <method>convertHTML</method>(str) {
+                
+                let res = str.<method>split</method>(<string>'&'</string>).<method>join</method>(<string>'&amp;amp'</string>)
+                .<method>split</method>(<string>'&lt;'</string>).join(<string>'&amp;lt;'</string>)
+                .<method>split</method>(<string>'&gt;'</string>).<method>join</method>(<string>'&amp;gt;'</string>).
+                <method>split</method>(<string>'"'</string>).<method>join</method>(<string>'&amp;quot;'</string>)
+                .<method>split</method>(<string>"'"</string>).<method>join</method>(<string>'&amp;apos;'</string>);
+         
+                    return res;
+                   }
+                   
+                   <method>convertHTML</method>(<string>"Dolce & Gabbana"</string>);            
+                      
+                </code>
+              </pre>
+            </article>
+        </section><!-- section 7-->
+
+        <section id="Drop_it" class="main-section">
+            <header>Drop it</header>
+            <article>
+                <p><span><strong>Problem Description : </strong></span>Given the array arr, iterate through and remove
+                    each element starting from the first element (the 0 index) until the function func returns true when
+                    the iterated element is passed through it.</p>
+                <p>Then return the rest of the array once the condition is satisfied, otherwise, arr should be returned
+                    as an empty array.</p>
+                <div><b>Solution :</b></div>
+                <ul>
+                    <li>Here we use <code class="inside">shift()</code> method of array to remove the first element of
+                        the array.</li>
+                </ul>
+                <pre>
+                <code>function <method>dropElements</method>(arr, func) {
+                     while(!<method>func</method>(arr[0])){
+                     arr.<method>shift</method>();
+                     }
+                     return arr;
+                   }
+        
+                   <method>dropElements</method>([1, 2, 3], function(n) {return n &lt; 3; });
+                </code>
+              </pre>
+            </article>
+        </section><!-- section 8-->
+
+        <section id="Steamroller" class="main-section">
+            <header>Steamroller</header>
+            <article>
+                <p><span><strong>Problem Description : </strong></span>Flatten a nested array. You must account for
+                    varying levels of nesting.</p>
+                <div><b>Solution :</b></div>
+                <ul>
+                    <li>Given array can be complex of any level, and <code class="inside">flat()</code> method is not
+                        supposed to be used.</li>
+                    <li>Here, we use <code class="inside">reduce()</code> method to get a final plain array. In every
+                        iteration of it, we concat the element of the element of the given array if it's not in next
+                        level array to the plain final array.</li>
+                </ul>
+                <pre>
+                <code>function <method>steamrollArray</method>(arr) {
+                     return arr.<method>reduce</method>((v, a) =>{
+                        return v.<method>concat</method>(Array.<method>isArray</method>(a) ? <method>steamrollArray</method>(a) : a)
+                     }, []);
+                  }
+        
+                  <method>steamrollArray</method>([1, [2], [3, [[4]]]]);
+                </code>
+              </pre>
+            </article>
+        </section><!-- section 9-->
+
+        <section id="Binary_Agents" class="main-section">
+            <header>Binary Agents</header>
+            <article>
+                <p><span><strong>Problem Description : </strong></span>Return an English translated sentence of the
+                    passed binary string.</p>
+
+                <p>The binary string will be space separated.</p>
+                <div><b>Solution :</b></div>
+                <ul>
+                    <li>Convert given binary string into an array of binary numbers dividing it with space.</li>
+                    <li> Now converting that value to decimal value by which we can get corresponding letter by using
+                        <code class="inside">String.fromCharCode()</code> mthod.
+                    </li>
+                </ul>
+                <pre>
+                <code>function <method>binaryAgent</method>(str) {
+                     return String.<method>fromCharCode</method>(...str.<method>split</method>(' ').<method>map</method>(binary => <method>parseInt</method>(binary,2)));
+                  }
+                  <method>binaryAgent</method>(<string>"01000001 01110010 01100101 01101110 00100111 01110100 00100000"</string>);
+                </code>
+              </pre>
+            </article>
+        </section><!-- section 10-->
+
+        <section id="Everything_Be_True" class="main-section">
+            <header>Everything Be True</header>
+            <article>
+                <p><span><strong>Problem Description : </strong></span>Check if the predicate (second argument)
+                    is <b>truthy</b> on all elements of a collection (first argument).</p>
+
+                <ul>
+                    <li>In other words, you are given an array collection of objects. The predicate <code
+                            class="value">pre</code> will be an object property and you need to return <code
+                            class="value">true</code> if its value is <code class="value">truthy</code>. Otherwise,
+                        return <code class="value">false</code>.</li>
+                    <li>In JavaScript, <code class="value">truthy</code> values are values that translate to <code
+                            class="value">true</code> when evaluated in a Boolean context.</li>
+                    <li>Remember, you can access object properties through either dot notation or <code
+                            class="value">[]</code> notation.</li>
+                </ul>
+                <div><b>Solution :</b></div>
+                <pre>
+                <code>function <method>truthCheck</method>(collection, pre) {
+                    return collection.<method>every</method>(a =&gt; a.<method>hasOwnProperty</method>(pre) &amp;&amp; <method>Boolean</method>(a[pre]));
+                  }
+        
+                  <method>truthCheck</method>([{<string>"user"</string>: <string>"Tinky-Winky"</string>, <string>"sex"</string>: <string>"male"</string>}, {<string>"user"</string>: <string>"Dipsy"</string>, <string>"sex"</string>: <string>"male"</string>}, {<string>"user"</string>: <string>"Laa-Laa"</string>, <string>"sex"</string>: <string>"female"</string>}, {<string>"user"</string>: <string>"Po"</string>, <string>"sex"</string>: <string>""</string>}], <string>"sex"</string>)
+                </code>
+              </pre>
+            </article>
+        </section><!-- section 11-->
+
+        <section id="Map_the_Debris" class="main-section">
+            <header>Map the Debris</header>
+            <article>
+                <p><span><strong>Problem Description : </strong></span>Return a new array that transforms the elements'
+                    average altitude into their orbital periods (in seconds).</p>
+                <ul>
+                    <li>The array will contain objects in the format <code
+                            class="inside separate">{name:&nbsp;'name',avgAlt:&nbsp;avgAlt}</code>.</li>
+                    <li>The values should be rounded to the nearest whole number. The body being orbited is Earth.</li>
+                    <li>The radius of the earth is 6367.4447 kilometers, and the GM value of earth is 398600.4418
+                        km<sup>3</sup>s<sup>-2</sup>.</li>
+                </ul>
+                <div><b>Solution :</b></div>
+                <pre>
+                <code>function <method>orbitalPeriod</method>(arr) {
+                    var GM = 398600.4418, earthRadius = 6367.4447;
+                    
+                    return arr.<method>map</method>( a => {
+                      const period = Math.<method>round</method>(2*Math.PI*(Math.<method>sqrt</method>
+                      (Math.<method>pow</method>(earthRadius+a.avgAlt,3)/GM)));
+                      return {name : a.name, orbitalPeriod : period}
+                    });
+                    
+                  }
+                  
+                  <method>orbitalPeriod</method>([{name : <string>"sputnik"</string>, avgAlt : 35873.5553}]);
+                    
+                </code>
+              </pre>
+            </article>
+        </section><!-- section 12-->
+
+        <section>
+            <header>Reference :
+            </header>
+            <article>
+                <ul>
+                    <li>All the above problems and their descriptions you can find in JavaScript Algorithm and
+                        Datastructures course by FreeCodeCamp <a
+                            href="https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/#functional-programming">here</a>,
+                        under Intermediate Algorithm Scripting section.
+            </article>
+        </section>
+
+    </main>
+
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js" type="text/javascript"></script>
+</body>
+
+</html>
